@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitQuest</title>
+
+<style>
+:root {
+  --bg: #080a12;
+  --card: #141827;
+  --card2: #1b2032;
+  --text: #f5f7ff;
+  --muted: #9299b5;
+  --purple: #8b5cf6;
+  --blue: #38bdf8;
+  --green: #34d399;
+  --yellow: #fbbf24;
+  --red: #fb7185;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, #24154b 0, transparent 35%),
+    radial-gradient(circle at bottom right, #082b3d 0, transparent 30%),
+    var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.app {
+  max-width: 1050px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* HEADER */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+}
+
+.reset {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: white;
+  background: var(--card);
+}
+
+/* HERO */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  gap: 16px;
+}
+
+.card {
+  background: linear-gradient(145deg, #191e30, #10131f);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+
+.player-card {
+  padding: 25px;
+}
+
+.player {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.avatar {
+  width: 85px;
+  height: 85px;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  border-radius: 22px;
+  background: #292148;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.player h1 {
+  margin: 5px 0;
+  font-size: 2rem;
+}
+
+.level {
+  color: var(--purple);
+  font-weight: 900;
+}
+
+.xp-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: .8rem;
+}
+
+.xp-info span:last-child {
+  color: var(--muted);
+}
+
+.progress {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #080a11;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--purple), var(--blue));
+  transition: width .4s;
+}
+
+/* STATS */
+
+.stats {
+  padding: 22px;
+}
+
+.stats h2 {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.stat {
+  margin-bottom: 16px;
+}
+
+.stat-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: .8rem;
+  margin-bottom: 6px;
+}
+
+.stat-head span:last-child {
+  color: var(--muted);
+}
+
+.stat-bar {
+  height: 7px;
+  border-radius: 20px;
+  background: #080a11;
+  overflow: hidden;
+}
+
+.stat-bar div {
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+}
+
+.strength { background: var(--red); }
+.endurance { background: var(--green); }
+.mobility { background: var(--blue); }
+.consistency { background: var(--yellow); }
+
+/* QUESTS */
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 28px 2px 13px;
+}
+
+.section-title h2 {
+  font-size: 1.1rem;
+}
+
+.section-title span {
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.quests {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+}
+
+.quest {
+  padding: 20px;
+  transition: .2s;
+}
+
+.quest:hover {
+  transform: translateY(-3px);
+  border-color: #8b5cf655;
+}
+
+.quest.completed {
+  opacity: .55;
+}
+
+.quest-icon {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: #8b5cf61c;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.quest h3 {
+  margin-bottom: 7px;
+}
+
+.quest p {
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.quest-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.reward {
+  color: var(--yellow);
+  font-size: .8rem;
+  font-weight: 900;
+}
+
+.quest-btn,
+.primary-btn {
+  padding: 10px 14px;
+  border-radius: 11px;
+  color: white;
+  font-weight: 800;
+  background: linear-gradient(135deg,#8b5cf6,#6d28d9);
+}
+
+.quest-btn:disabled {
+  background: #292e40;
+  color: #888fa7;
+  cursor: default;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+}
+
+.mini {
+  padding: 20px;
+}
+
+.big {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 7px 0;
+}
+
+.mini p {
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0,0,0,.78);
+  backdrop-filter: blur(8px);
+}
+
+.modal.show {
+  display: grid;
+}
+
+.modal-box {
+  width: min(430px,100%);
+  padding: 30px;
+  text-align: center;
+  border-radius: 25px;
+  background: linear-gradient(145deg,#211b3c,#10131f);
+  border: 1px solid #8b5cf655;
+  box-shadow: 0 30px 100px #000;
+  animation: pop .25s ease;
+}
+
+.modal-icon {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.modal-box h2 {
+  margin-bottom: 8px;
+}
+
+.modal-box p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.timer {
+  font-size: 4.2rem;
+  font-weight: 900;
+  margin: 25px 0 18px;
+  color: var(--purple);
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-bar {
+  height: 10px;
+  border-radius: 20px;
+  background: #080a11;
+  overflow: hidden;
+}
+
+.timer-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg,var(--purple),var(--blue));
+  transition: width 1s linear;
+}
+
+.modal-buttons {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.cancel-btn {
+  padding: 11px;
+  border-radius: 11px;
+  color: var(--muted);
+  background: #222739;
+}
+
+.warning {
+  display: block;
+  margin-top: 15px;
+  color: #777f9c;
+  font-size: .7rem;
+  line-height: 1.5;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  transform: translate(-50%,100px);
+  padding: 14px 20px;
+  border-radius: 13px;
+  background: #1d2438;
+  border: 1px solid #34d39955;
+  font-weight: 800;
+  opacity: 0;
+  transition: .3s;
+  z-index: 200;
+}
+
+.toast.show {
+  transform: translate(-50%,0);
+  opacity: 1;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media(max-width:750px) {
+  .hero,
+  .quests {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:450px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .app {
+    padding: 14px;
+  }
+
+  .timer {
+    font-size: 3.5rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">⚔️</div>
+    FITQUEST
+  </div>
+
+  <button class="reset" id="reset">↻</button>
+</header>
+
+<section class="hero">
+
+  <div class="card player-card">
+
+    <div class="player">
+
+      <div class="avatar">🧙</div>
+
+      <div>
+        <div class="eyebrow">Your Hero</div>
+        <h1>Fitness Adventurer</h1>
+        <div class="level">
+          LEVEL <span id="level">1</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="xp-info">
+      <span>Experience</span>
+      <span>
+        <span id="xp">0</span> /
+        <span id="nextXP">500</span> XP
+      </span>
+    </div>
+
+    <div class="progress">
+      <div class="progress-fill" id="xpBar"></div>
+    </div>
+
+  </div>
+
+  <div class="card stats">
+
+    <h2>⚡ Character Stats</h2>
+
+    <div class="stat">
+      <div class="stat-head">
+        <span>⚔️ Strength</span>
+        <span id="strengthValue">1</span>
+      </div>
+      <div class="stat-bar">
+        <div class="strength" id="strengthBar"></div>
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-head">
+        <span>🏃 Endurance</span>
+        <span id="enduranceValue">1</span>
+      </div>
+      <div class="stat-bar">
+        <div class="endurance" id="enduranceBar"></div>
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-head">
+        <span>🧘 Mobility</span>
+        <span id="mobilityValue">1</span>
+      </div>
+      <div class="stat-bar">
+        <div class="mobility" id="mobilityBar"></div>
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-head">
+        <span>🔥 Consistency</span>
+        <span id="consistencyValue">1</span>
+      </div>
+      <div class="stat-bar">
+        <div class="consistency" id="consistencyBar"></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<div class="section-title">
+  <h2>⚔️ Today's Quests</h2>
+  <span id="questCount">0 / 3 complete</span>
+</div>
+
+<section class="quests">
+
+  <article class="card quest"
+    data-id="walk"
+    data-xp="80"
+    data-stat="endurance"
+    data-duration="20">
+
+    <div class="quest-icon">🏃</div>
+
+    <h3>Forest Run</h3>
+
+    <p>
+      Complete a 20-minute walk or comfortable movement session.
+    </p>
+
+    <div class="quest-bottom">
+      <span class="reward">+80 XP</span>
+      <button class="quest-btn">Start Quest</button>
+    </div>
+
+  </article>
+
+  <article class="card quest"
+    data-id="strength"
+    data-xp="150"
+    data-stat="strength"
+    data-duration="10">
+
+    <div class="quest-icon">⚔️</div>
+
+    <h3>Warrior's Trial</h3>
+
+    <p>
+      Complete a 10-minute strength-focused session at your chosen level.
+    </p>
+
+    <div class="quest-bottom">
+      <span class="reward">+150 XP</span>
+      <button class="quest-btn">Start Quest</button>
+    </div>
+
+  </article>
+
+  <article class="card quest"
+    data-id="mobility"
+    data-xp="60"
+    data-stat="mobility"
+    data-duration="10">
+
+    <div class="quest-icon">🧘</div>
+
+    <h3>Temple of Flow</h3>
+
+    <p>
+      Spend 10 minutes on comfortable mobility or stretching.
+    </p>
+
+    <div class="quest-bottom">
+      <span class="reward">+60 XP</span>
+      <button class="quest-btn">Start Quest</button>
+    </div>
+
+  </article>
+
+</section>
+
+<div class="section-title">
+  <h2>📊 Adventure Stats</h2>
+</div>
+
+<section class="dashboard">
+
+  <div class="card mini">
+    <div class="eyebrow">Streak</div>
+    <div class="big">🔥 <span id="streak">0</span></div>
+    <p>days of activity</p>
+  </div>
+
+  <div class="card mini">
+    <div class="eyebrow">Gold</div>
+    <div class="big">🪙 <span id="gold">0</span></div>
+    <p>earned from quests</p>
+  </div>
+
+  <div class="card mini">
+    <div class="eyebrow">Quests</div>
+    <div class="big">🏆 <span id="total">0</span></div>
+    <p>completed adventures</p>
+  </div>
+
+</section>
+
+</div>
+
+
+<!-- TIMER MODAL -->
+
+<div class="modal" id="timerModal">
+
+  <div class="modal-box">
+
+    <div class="modal-icon" id="modalIcon">🏃</div>
+
+    <div class="eyebrow">ACTIVE QUEST</div>
+
+    <h2 id="modalTitle">Forest Run</h2>
+
+    <p id="modalDescription">
+      Your quest is active.
+    </p>
+
+    <div class="timer" id="timer">
+      20:00
+    </div>
+
+    <div class="timer-bar">
+      <div class="timer-fill" id="timerFill"></div>
+    </div>
+
+    <div class="modal-buttons">
+
+      <button
+        class="primary-btn"
+        id="claim"
+        disabled>
+        🔒 Complete the session
+      </button>
+
+      <button
+        class="cancel-btn"
+        id="cancel">
+        Exit Quest
+      </button>
+
+    </div>
+
+    <small class="warning">
+      FitQuest tracks the session timer only. It cannot independently
+      verify that exercise was performed.
+    </small>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+const state = {
+  level: Number(localStorage.getItem("fq_level")) || 1,
+  xp: Number(localStorage.getItem("fq_xp")) || 0,
+  gold: Number(localStorage.getItem("fq_gold")) || 0,
+  streak: Number(localStorage.getItem("fq_streak")) || 0,
+  total: Number(localStorage.getItem("fq_total")) || 0,
+  completed: JSON.parse(
+    localStorage.getItem("fq_completed") || "[]"
+  ),
+  stats: JSON.parse(
+    localStorage.getItem("fq_stats") ||
+    '{"strength":1,"endurance":1,"mobility":1,"consistency":1}'
+  )
+};
+
+let activeQuest = null;
+let timer = null;
+let remaining = 0;
+let totalTime = 0;
+
+
+/* ELEMENTS */
+
+const modal = document.getElementById("timerModal");
+const timerDisplay = document.getElementById("timer");
+const timerFill = document.getElementById("timerFill");
+const claimButton = document.getElementById("claim");
+
+
+/* SAVE */
+
+function save() {
+
+  localStorage.setItem("fq_level", state.level);
+  localStorage.setItem("fq_xp", state.xp);
+  localStorage.setItem("fq_gold", state.gold);
+  localStorage.setItem("fq_streak", state.streak);
+  localStorage.setItem("fq_total", state.total);
+  localStorage.setItem(
+    "fq_completed",
+    JSON.stringify(state.completed)
+  );
+  localStorage.setItem(
+    "fq_stats",
+    JSON.stringify(state.stats)
+  );
+
+}
+
+
+/* UI */
+
+function updateUI() {
+
+  document.getElementById("level").textContent =
+    state.level;
+
+  document.getElementById("xp").textContent =
+    state.xp;
+
+  const next = state.level * 500;
+
+  document.getElementById("nextXP").textContent =
+    next;
+
+  document.getElementById("xpBar").style.width =
+    Math.min((state.xp / next) * 100,100) + "%";
+
+  document.getElementById("gold").textContent =
+    state.gold;
+
+  document.getElementById("streak").textContent =
+    state.streak;
+
+  document.getElementById("total").textContent =
+    state.total;
+
+  updateStat("strength");
+  updateStat("endurance");
+  updateStat("mobility");
+  updateStat("consistency");
+
+  document.querySelectorAll(".quest").forEach(card => {
+
+    const button =
+      card.querySelector(".quest-btn");
+
+    if (state.completed.includes(card.dataset.id)) {
+
+      card.classList.add("completed");
+
+      button.disabled = true;
+      button.textContent = "Completed";
+
+    } else {
+
+      card.classList.remove("completed");
+
+      button.disabled = false;
+      button.textContent = "Start Quest";
+
+    }
+
+  });
+
+  document.getElementById("questCount").textContent =
+    `${state.completed.length} / 3 complete`;
+
+}
+
+
+function updateStat(stat) {
+
+  const value = state.stats[stat];
+
+  document.getElementById(
+    stat + "Value"
+  ).textContent = value;
+
+  document.getElementById(
+    stat + "Bar"
+  ).style.width =
+    Math.min(value * 10,100) + "%";
+
+}
+
+
+/* START QUEST */
+
+function startQuest(card) {
+
+  activeQuest = card;
+
+  const minutes =
+    Number(card.dataset.duration);
+
+  totalTime = minutes * 60;
+  remaining = totalTime;
+
+  document.getElementById("modalIcon").textContent =
+    card.querySelector(".quest-icon").textContent;
+
+  document.getElementById("modalTitle").textContent =
+    card.querySelector("h3").textContent;
+
+  document.getElementById("modalDescription").textContent =
+    card.querySelector("p").textContent;
+
+  claimButton.disabled = true;
+
+  claimButton.textContent =
+    "🔒 Complete the session";
+
+  updateTimer();
+
+  modal.classList.add("show");
+
+  clearInterval(timer);
+
+  timer = setInterval(() => {
+
+    remaining--;
+
+    updateTimer();
+
+    if (remaining <= 0) {
+
+      clearInterval(timer);
+
+      timer = null;
+
+      claimButton.disabled = false;
+
+      claimButton.textContent =
+        "🏆 Claim XP";
+
+      showToast("Quest timer complete!");
+
+    }
+
+  },1000);
+
+}
+
+
+/* TIMER */
+
+function updateTimer() {
+
+  const minutes =
+    Math.floor(remaining / 60);
+
+  const seconds =
+    remaining % 60;
+
+  timerDisplay.textContent =
+    `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+
+  const progress =
+    ((totalTime - remaining) / totalTime) * 100;
+
+  timerFill.style.width =
+    Math.max(0,Math.min(progress,100)) + "%";
+
+}
+
+
+/* CLAIM */
+
+claimButton.addEventListener("click", () => {
+
+  if (!activeQuest || remaining > 0) {
+    return;
+  }
+
+  const xp =
+    Number(activeQuest.dataset.xp);
+
+  const stat =
+    activeQuest.dataset.stat;
+
+  state.completed.push(
+    activeQuest.dataset.id
+  );
+
+  state.total++;
+
+  state.gold += Math.floor(xp / 10);
+
+  state.stats[stat]++;
+  state.stats.consistency++;
+
+  state.xp += xp;
+
+  const required =
+    state.level * 500;
+
+  if (state.xp >= required) {
+
+    state.xp -= required;
+
+    state.level++;
+
+    showToast(
+      `🎉 LEVEL UP! You are now Level ${state.level}`
+    );
+
+  } else {
+
+    showToast(`✨ +${xp} XP   🪙 +${Math.floor(xp/10)} Gold`);
+
+  }
+
+  save();
+
+  updateUI();
+
+  closeModal();
+
+});
+
+
+/* CLOSE */
+
+function closeModal() {
+
+  clearInterval(timer);
+
+  timer = null;
+
+  activeQuest = null;
+
+  modal.classList.remove("show");
+
+}
+
+document.getElementById("cancel")
+  .addEventListener("click",closeModal);
+
+
+/* QUEST BUTTONS */
+
+document.querySelectorAll(".quest").forEach(card => {
+
+  card.querySelector(".quest-btn")
+    .addEventListener("click",() => {
+
+      startQuest(card);
+
+    });
+
+});
+
+
+/* RESET */
+
+document.getElementById("reset")
+  .addEventListener("click",() => {
+
+    if (!confirm("Reset your FitQuest progress?")) {
+      return;
+    }
+
+    localStorage.clear();
+
+    location.reload();
+
+  });
+
+
+/* TOAST */
+
+function showToast(message) {
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  },2500);
+
+}
+
+
+/* INITIALIZE */
+
+updateUI();
+
+</script>
+
+</body>
+  </html>
+  
